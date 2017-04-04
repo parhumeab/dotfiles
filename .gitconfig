@@ -1,0 +1,18 @@
+[user]
+        name = parhumeab
+        email = pfarzad@eab.com
+[color]
+        ui = auto
+[alias]
+        undo-last-commit = reset --soft HEAD~
+        obranch = for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)'
+        pgrep = grep --break --heading --line-number
+        slog = log --stat
+        dsf = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\" && git diff --color \"$@\" | diff-so-fancy  | less --tabs=4 -RFX; }; f"
+[core]
+        autocrlf = input
+        editor = vim
+[grep]
+        lineNumber = true
+[push]
+        default = simple
