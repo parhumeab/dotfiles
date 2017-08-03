@@ -4,6 +4,9 @@
 [color]
         ui = auto
 [alias]
+        br = branch
+        co = checkout
+        st = status
         undo-last-commit = reset --soft HEAD~
         obranch = for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)'
         pgrep = grep --break --heading --line-number
