@@ -5,7 +5,8 @@ filetype plugin on
 filetype indent on
 
 set t_Co=256
-colorscheme pdesert
+
+colorscheme desert
 
 let mapleader = "\\"
 set encoding=utf-8
@@ -22,7 +23,9 @@ set hlsearch
 set expandtab
 set ruler
 set laststatus=2
-set tags=/Users/farzadp/env/ctags/lib/python2.7/site-packages/tags,tags
+set showcmd
+"set tags=/Users/farzadp/env/ctags/lib/python2.7/site-packages/tags,tags
+set tags=/home/parhum/Projects/tags
 
 set ffs=unix,dos
 set ff=unix
@@ -38,12 +41,12 @@ augroup indent
 augroup END
 
 "Plugins using vim-plug"
-"call plug#begin()
-"Plug 'mileszs/ack.vim'
-"nnoremap ,a :Ack<space>
+call plug#begin()
+Plug 'mileszs/ack.vim'
+nnoremap ,a :Ack<space>
 "nnore <C-J> :cn<CR>
 "nnore <C-K> :cp<CR>
-"nnore ,, :Ack <C-R><C-W><cr>
+"nnore ,, :Ack <C-R><C-W><CR>
 "Plug 'davidhalter/jedi-vim'
 "let g:jedi#force_py_version = 2
 "let g:jedi#use_tabs_not_buffers = 1
@@ -52,11 +55,15 @@ augroup END
 "let g:jedi#popup_select_first = 0
 "let g:jedi#show_call_signatures = 0
 "let g:jedi#smart_auto_mappings = 0
-"Plug 'ctrlpvim/ctrlp.vim'
-"nnoremap <silent> ,m :CtrlPMRUFiles<CR>
-"nnoremap <silent> ,n :CtrlPTag<CR>
+Plug 'ctrlpvim/ctrlp.vim'
+nnoremap <silent> ,m :CtrlPMRUFiles<CR>
+nnoremap <silent> ,n :CtrlPTag<CR>
+nnoremap <silent> ,N :CtrlPTagAll<CR>
 "let g:ctrlp_working_path_mode = ''
-"Plug 'tpope/vim-fugitive'
+"let g:ctrlp_custom_ignore = {
+"    \ 'dir':  '\.git$\|\.hg$\|\.svn$\|bower_components$\|dist$\|node_modules$',
+"    \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$\|tags$' }
+Plug 'tpope/vim-fugitive'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 "let g:airline_theme='term'
@@ -67,17 +74,36 @@ augroup END
 "Plug 'aspickard/vim-pydocstring'
 "Plug 'groenewege/vim-less'
 "Plug 'vim-scripts/taglist.vim'
-"Plug 'majutsushi/tagbar'
-"nnoremap <silent> ,b :TagbarToggle<CR>
-"Plug 'craigemery/vim-autotag'
-"Plug 'sjl/gundo.vim'
-"nnoremap ,u :GundoToggle<CR>
-"Plug 'tpope/vim-vinegar'
+Plug 'majutsushi/tagbar'
+nnoremap <silent> ,b :TagbarToggle<CR>
+Plug 'craigemery/vim-autotag'
+Plug 'sjl/gundo.vim'
+nnoremap ,u :GundoToggle<CR>
+Plug 'tpope/vim-vinegar'
 "Plug 'scrooloose/nerdtree'
-"nnoremap ,f :NERDTreeToggle<cr>
-"Plug 'justinmk/vim-sneak'
-"Plug 'godlygeek/tabular'
-"call plug#end()
+"nnoremap ,f :NERDTreeToggle<CR>
+Plug 'justinmk/vim-sneak'
+Plug 'godlygeek/tabular'
+"Plug 'tpope/vim-cucumber'
+"Plug 'nvie/vim-flake8'
+"autocmd FileType python map <buffer> <F9> :call Flake8()<CR>
+Plug 'vim-syntastic/syntastic'
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] } 
+let g:syntastic_python_checkers = ['flake8']
+nnoremap <silent> <F9> :SyntasticCheck<CR>
+Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/tsuquyomi'
+Plug 'Shougo/vimproc.vim'
+let g:typescript_compiler_binary = 'tsc'
+let g:typescript_compiler_options = ''
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi']
+let g:syntastic_typescript_tsc_fname = ''
+call plug#end()
 
 "Move vertically by visual line"
 nnoremap j gj
@@ -86,8 +112,8 @@ nnoremap k gk
 "Splits"
 set splitbelow
 set splitright
-nnoremap ,t :tab sp<cr>
-nnoremap ,v :vsplit<cr>
+nnoremap ,s :split<CR>
+nnoremap ,v :vsplit<CR>
 
 "Resize splits with Ctrl-Shift-ArrowKeys"
 nnoremap <C-S-Left> <C-W><lt>
@@ -104,34 +130,40 @@ nnoremap <C-Down> <C-W><down>
 "Convert JSON into pretty printed json"
 command! FormatJSON execute "%!python -m json.tool"
 
-"Fix format of psv cells
-fun! FormatPSV() range
-        exec ":'<,'>!python ~/.vim/python/format_psv.py"
-endfun
+"Convert XML into indented XML"
+command! FormatXML execute "%!xmllint --format -"
 
-vnoremap ,p :call FormatPSV()<CR>
+"Fix format of psv cells
+"fun! FormatPSV() range
+"        exec ":'<,'>!python ~/.vim/python/format_psv.py"
+"endfun
+"vnoremap ,p :call FormatPSV()<CR>
+vnoremap ,p :Tabularize /<bar><CR>
 
 nnoremap <leader>p :cd ~/Projects/<CR>
 
 "Shortcut to navigate files"
-nnoremap - :e %:h<cr>
+nnoremap - :e %:h<CR>
 
 "Remove trailing spaces"
 nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 "Other
-nnoremap ,s :split<cr>
-nnoremap ,z :set wrap!<cr>
-nnoremap ,q <silent> :ccl<cr>
+nnoremap ,t :tab sp<CR>
+nnoremap ,z :set wrap!<CR>
+nnoremap ,q :cclose<CR>
 noremap J j
 noremap K k
-
-"inoremap jj <esc>
-
-"nnoremap ,v :tabe ~/.vimrc<cr>
-
-nnoremap <F8> Oimport ipdb; ipdb.set_trace()<esc>
+"inoremap jj <Esc>
+"nnoremap ,v :tabe ~/.vimrc<CR>
+nnoremap <F8> Oimport ipdb; ipdb.set_trace()<Esc>
 inoremap <F8> import ipdb; ipdb.set_trace()
+nnoremap <F10> :set relativenumber!<CR>
+nnoremap <F12> :set number!<CR>
+
+""Better indentation
+"vnoremap < <gv
+"vnoremap > >gv
 
 "Settings for gvim"
 "set guioptions-=m  "remove menu bar
@@ -151,11 +183,16 @@ endif
 "if !isdirectory(expand(&backupdir))
 "    call mkdir(expand(&backupdir), "p")
 "endif
-set undofile
-set undodir=~/.vim/tmp/undo/
-if !isdirectory(expand(&undodir))
-    call mkdir(expand(&undodir), "p")
-endif
+"set undofile
+"set undodir=~/.vim/tmp/undo/
+"if !isdirectory(expand(&undodir))
+"    call mkdir(expand(&undodir), "p")
+"endif
+
+"Explore https://shapeshed.com/vim-netrw/"
+"nnoremap ,f :Vexplore<CR>
+"let g:netrw_banner=0
+"let g:netrw_browse_split=4
 
 " Auto format cucumber tables https://gist.github.com/tpope/287147
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
