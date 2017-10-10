@@ -40,6 +40,8 @@ augroup indent
     au BufNewFile,BufRead *.feature set tabstop=2 softtabstop=2 shiftwidth=2 et
 augroup END
 
+"https://vi.stackexchange.com/questions/4662/language-specific-configuration-colorcolumn"
+
 "Plugins using vim-plug"
 call plug#begin()
 Plug 'mileszs/ack.vim'
@@ -59,6 +61,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 nnoremap <silent> ,m :CtrlPMRUFiles<CR>
 nnoremap <silent> ,n :CtrlPTag<CR>
 nnoremap <silent> ,N :CtrlPTagAll<CR>
+"let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:15'
 "let g:ctrlp_working_path_mode = ''
 "let g:ctrlp_custom_ignore = {
 "    \ 'dir':  '\.git$\|\.hg$\|\.svn$\|bower_components$\|dist$\|node_modules$',
@@ -95,14 +98,18 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] } 
 let g:syntastic_python_checkers = ['flake8']
 nnoremap <silent> <F9> :SyntasticCheck<CR>
+
+
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
 Plug 'Shougo/vimproc.vim'
+
 let g:typescript_compiler_binary = 'tsc'
 let g:typescript_compiler_options = ''
 let g:tsuquyomi_disable_quickfix = 1
 let g:syntastic_typescript_checkers = ['tsuquyomi']
 let g:syntastic_typescript_tsc_fname = ''
+
 call plug#end()
 
 "Move vertically by visual line"
@@ -156,10 +163,20 @@ noremap J j
 noremap K k
 "inoremap jj <Esc>
 "nnoremap ,v :tabe ~/.vimrc<CR>
+
+" pdb shortcut
 nnoremap <F8> Oimport ipdb; ipdb.set_trace()<Esc>
 inoremap <F8> import ipdb; ipdb.set_trace()
+
+" Change relative numbers displayed
 nnoremap <F10> :set relativenumber!<CR>
+
+" Toggle numbering for copying and pasting
 nnoremap <F12> :set number!<CR>
+
+" Disable help button
+inoremap <F1> <C-o>:echo<CR>
+nnoremap <F1> <ESC>
 
 ""Better indentation
 "vnoremap < <gv
