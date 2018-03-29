@@ -22,6 +22,7 @@ set showmatch
 set hlsearch
 set expandtab
 set ruler
+set title
 set laststatus=2
 set showcmd
 "set tags=/Users/farzadp/env/ctags/lib/python2.7/site-packages/tags,tags
@@ -46,6 +47,7 @@ augroup END
 call plug#begin()
 Plug 'mileszs/ack.vim'
 nnoremap ,a :Ack<space>
+let g:ackprg = 'rg --vimgrep --no-heading'
 "nnore <C-J> :cn<CR>
 "nnore <C-K> :cp<CR>
 "nnore ,, :Ack <C-R><C-W><CR>
@@ -57,16 +59,19 @@ nnoremap ,a :Ack<space>
 "let g:jedi#popup_select_first = 0
 "let g:jedi#show_call_signatures = 0
 "let g:jedi#smart_auto_mappings = 0
+
 Plug 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_map = ''
 nnoremap <silent> ,m :CtrlPMRUFiles<CR>
-nnoremap <silent> ,n :CtrlPTag<CR>
-nnoremap <silent> ,N :CtrlPTagAll<CR>
+"nnoremap <silent> ,n :CtrlPTag<CR>
+"nnoremap <silent> ,N :CtrlPTagAll<CR>
 "let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:15'
 "let g:ctrlp_working_path_mode = ''
 "let g:ctrlp_custom_ignore = {
 "    \ 'dir':  '\.git$\|\.hg$\|\.svn$\|bower_components$\|dist$\|node_modules$',
 "    \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$\|tags$' }
 Plug 'tpope/vim-fugitive'
+nnoremap <F11> :Gblame<CR>
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 "let g:airline_theme='term'
@@ -95,10 +100,9 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] } 
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] }
 let g:syntastic_python_checkers = ['flake8']
 nnoremap <silent> <F9> :SyntasticCheck<CR>
-
 
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
@@ -109,6 +113,13 @@ let g:typescript_compiler_options = ''
 let g:tsuquyomi_disable_quickfix = 1
 let g:syntastic_typescript_checkers = ['tsuquyomi']
 let g:syntastic_typescript_tsc_fname = ''
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+"Plug 'pbogut/fzf-mru.vim'
+"nnoremap <silent> ,m :FZFMru<CR>
+nnoremap <silent> ,n :Tags<CR>
+nnoremap <silent> <C-P> :Files<CR>
 
 call plug#end()
 
@@ -146,6 +157,7 @@ command! FormatXML execute "%!xmllint --format -"
 "endfun
 "vnoremap ,p :call FormatPSV()<CR>
 vnoremap ,p :Tabularize /<bar><CR>
+vnoremap ,c :Tabularize /,<CR>
 
 nnoremap <leader>p :cd ~/Projects/<CR>
 
@@ -163,6 +175,7 @@ noremap J j
 noremap K k
 "inoremap jj <Esc>
 "nnoremap ,v :tabe ~/.vimrc<CR>
+command W w
 
 " pdb shortcut
 nnoremap <F8> Oimport ipdb; ipdb.set_trace()<Esc>
@@ -224,3 +237,7 @@ function! s:align()
     call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
   endif
 endfunction
+
+"From macvim docs, does it work?"
+"let s:path = system("echo echo VIMPATH'${PATH}' | $SHELL -l")
+"let $PATH = matchstr(s:path, 'VIMPATH\zs.\{-}\ze\n')
