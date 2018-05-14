@@ -71,7 +71,6 @@ nnoremap <silent> ,m :CtrlPMRUFiles<CR>
 "    \ 'dir':  '\.git$\|\.hg$\|\.svn$\|bower_components$\|dist$\|node_modules$',
 "    \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$\|tags$' }
 Plug 'tpope/vim-fugitive'
-nnoremap <F11> :Gblame<CR>
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 "let g:airline_theme='term'
@@ -103,6 +102,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] }
 let g:syntastic_python_checkers = ['flake8']
 nnoremap <silent> <F9> :SyntasticCheck<CR>
+"nnoremap <silent> <F10> :SyntasticReset<CR>
 
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
@@ -165,7 +165,8 @@ nnoremap <leader>p :cd ~/Projects/<CR>
 nnoremap - :e %:h<CR>
 
 "Remove trailing spaces"
-nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+"nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:noh<CR>
 
 "Other
 nnoremap ,t :tab sp<CR>
@@ -175,14 +176,13 @@ noremap J j
 noremap K k
 "inoremap jj <Esc>
 "nnoremap ,v :tabe ~/.vimrc<CR>
-command W w
 
 " pdb shortcut
 nnoremap <F8> Oimport ipdb; ipdb.set_trace()<Esc>
 inoremap <F8> import ipdb; ipdb.set_trace()
 
 " Change relative numbers displayed
-nnoremap <F10> :set relativenumber!<CR>
+nnoremap <F11> :set relativenumber!<CR>
 
 " Toggle numbering for copying and pasting
 nnoremap <F12> :set number!<CR>
@@ -194,6 +194,9 @@ nnoremap <F1> <ESC>
 ""Better indentation
 "vnoremap < <gv
 "vnoremap > >gv
+
+"Use capital W for save
+command! W w
 
 "Settings for gvim"
 "set guioptions-=m  "remove menu bar
@@ -223,6 +226,13 @@ endif
 "nnoremap ,f :Vexplore<CR>
 "let g:netrw_banner=0
 "let g:netrw_browse_split=4
+
+" Allow clicking past the 220th column
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
 
 " Auto format cucumber tables https://gist.github.com/tpope/287147
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
