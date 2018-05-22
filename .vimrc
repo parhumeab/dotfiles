@@ -118,8 +118,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 "Plug 'pbogut/fzf-mru.vim'
 "nnoremap <silent> ,m :FZFMru<CR>
-nnoremap <silent> ,n :Tags<CR>
-nnoremap <silent> <C-P> :Files<CR>
+nnoremap <silent> ,n :silent Tags<CR>
+nnoremap <silent> <C-P> :silent Files<CR>
 
 call plug#end()
 
