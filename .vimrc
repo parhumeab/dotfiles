@@ -25,6 +25,7 @@ set ruler
 set title
 set laststatus=2
 set showcmd
+set modelines=0
 "set tags=/Users/farzadp/env/ctags/lib/python2.7/site-packages/tags,tags
 set tags=/home/parhum/Projects/tags
 
@@ -172,7 +173,7 @@ nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:noh<CR>
 nnoremap ,t :tab sp<CR>
 nnoremap ,z :set wrap!<CR>
 nnoremap ,q :cclose<CR>
-noremap J j
+"noremap J j
 noremap K k
 "inoremap jj <Esc>
 "nnoremap ,v :tabe ~/.vimrc<CR>
