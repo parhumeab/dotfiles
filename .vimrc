@@ -120,6 +120,7 @@ Plug 'junegunn/fzf.vim'
 "Plug 'pbogut/fzf-mru.vim'
 "nnoremap <silent> ,m :FZFMru<CR>
 nnoremap <silent> ,n :silent Tags<CR>
+nnoremap <silent> ,l :silent Files<CR>
 nnoremap <silent> <C-P> :silent Files<CR>
 
 call plug#end()
@@ -173,7 +174,7 @@ nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:noh<CR>
 nnoremap ,t :tab sp<CR>
 nnoremap ,z :set wrap!<CR>
 nnoremap ,q :cclose<CR>
-"noremap J j
+noremap J j
 noremap K k
 "inoremap jj <Esc>
 "nnoremap ,v :tabe ~/.vimrc<CR>
@@ -191,6 +192,9 @@ nnoremap <F12> :set number!<CR>
 " Disable help button
 inoremap <F1> <C-o>:echo<CR>
 nnoremap <F1> <ESC>
+
+" Open file in new tab
+nnoremap <F2> <C-w>gf
 
 ""Better indentation
 "vnoremap < <gv
@@ -237,6 +241,7 @@ end
 
 " Auto format cucumber tables https://gist.github.com/tpope/287147
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+nnoremap <silent> ,f :call <SID>align()<CR>
 
 function! s:align()
   let p = '^\s*|\s.*\s|\s*$'
