@@ -40,6 +40,7 @@ augroup indent
     au BuFNewFile,BufRead *.css set tabstop=2 softtabstop=2 shiftwidth=2 et
     au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 et
     au BufNewFile,BufRead *.feature set tabstop=2 softtabstop=2 shiftwidth=2 et
+    au BufNewFile,BufRead *.txt set tabstop=2 softtabstop=2 shiftwidth=2 et
 augroup END
 
 "https://vi.stackexchange.com/questions/4662/language-specific-configuration-colorcolumn"
@@ -61,9 +62,9 @@ let g:ackprg = 'rg --vimgrep --no-heading'
 "let g:jedi#show_call_signatures = 0
 "let g:jedi#smart_auto_mappings = 0
 
-Plug 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_map = ''
-nnoremap <silent> ,m :CtrlPMRUFiles<CR>
+"Plug 'ctrlpvim/ctrlp.vim'
+"let g:ctrlp_map = ''
+"nnoremap <silent> ,m :CtrlPMRUFiles<CR>
 "nnoremap <silent> ,n :CtrlPTag<CR>
 "nnoremap <silent> ,N :CtrlPTagAll<CR>
 "let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:15'
@@ -122,6 +123,7 @@ Plug 'junegunn/fzf.vim'
 nnoremap <silent> ,n :silent Tags<CR>
 nnoremap <silent> ,l :silent Files<CR>
 nnoremap <silent> <C-P> :silent Files<CR>
+nnoremap <silent> ,m :History<CR>
 
 call plug#end()
 
