@@ -23,6 +23,7 @@ set hlsearch
 set expandtab
 set ruler
 set title
+set nowrap
 set laststatus=2
 set showcmd
 set modelines=0
@@ -47,9 +48,9 @@ augroup END
 
 "Plugins using vim-plug"
 call plug#begin()
-Plug 'mileszs/ack.vim'
-nnoremap ,a :Ack<space>
-let g:ackprg = 'rg --vimgrep --no-heading'
+"Plug 'mileszs/ack.vim'
+"nnoremap ,a :Ack<space>
+"let g:ackprg = 'rg --vimgrep --no-heading'
 "nnore <C-J> :cn<CR>
 "nnore <C-K> :cp<CR>
 "nnore ,, :Ack <C-R><C-W><CR>
@@ -96,14 +97,14 @@ Plug 'godlygeek/tabular'
 "Plug 'tpope/vim-cucumber'
 "Plug 'nvie/vim-flake8'
 "autocmd FileType python map <buffer> <F9> :call Flake8()<CR>
-Plug 'vim-syntastic/syntastic'
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] }
-let g:syntastic_python_checkers = ['flake8']
-nnoremap <silent> <F9> :SyntasticCheck<CR>
+"Plug 'vim-syntastic/syntastic'
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 0
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': [] }
+"let g:syntastic_python_checkers = ['flake8']
+"nnoremap <silent> <F9> :SyntasticCheck<CR>
 "nnoremap <silent> <F10> :SyntasticReset<CR>
 
 Plug 'leafgarland/typescript-vim'
@@ -120,10 +121,18 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 "Plug 'pbogut/fzf-mru.vim'
 "nnoremap <silent> ,m :FZFMru<CR>
-nnoremap <silent> ,n :silent Tags<CR>
-nnoremap <silent> ,l :silent Files<CR>
-nnoremap <silent> <C-P> :silent Files<CR>
-nnoremap <silent> ,m :History<CR>
+ 
+
+" Not working???
+"nnoremap <silent> ,n :silent Tags<CR>
+"nnoremap <silent> ,l :silent Files<CR>
+"nnoremap <silent> <C-P> :silent Files<CR>
+"nnoremap <silent> ,m :History<CR>
+
+nnoremap ,n :Tags<CR>
+nnoremap ,l :Files<CR>
+nnoremap <C-P> :Files<CR>
+nnoremap ,m :History<CR>
 
 call plug#end()
 
