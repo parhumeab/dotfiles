@@ -117,11 +117,15 @@ let g:tsuquyomi_disable_quickfix = 1
 let g:syntastic_typescript_checkers = ['tsuquyomi']
 let g:syntastic_typescript_tsc_fname = ''
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 "Plug 'pbogut/fzf-mru.vim'
 "nnoremap <silent> ,m :FZFMru<CR>
- 
+
+nnoremap ,n :Tags<CR>
+nnoremap ,l :Files<CR>
+nnoremap <C-P> :Files<CR>
+nnoremap ,m :History<CR>
 
 " Not working???
 "nnoremap <silent> ,n :silent Tags<CR>
@@ -129,10 +133,6 @@ Plug 'junegunn/fzf.vim'
 "nnoremap <silent> <C-P> :silent Files<CR>
 "nnoremap <silent> ,m :History<CR>
 
-nnoremap ,n :Tags<CR>
-nnoremap ,l :Files<CR>
-nnoremap <C-P> :Files<CR>
-nnoremap ,m :History<CR>
 
 call plug#end()
 
